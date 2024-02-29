@@ -11,20 +11,25 @@ const CoinDetail = () => {
     console.log(res);
 
     const postData = () => {
-        return axios.post("https://fakestoreapi.com/products", {
+        const res =  axios.post("https://fakestoreapi.com/products", {
             title: 'test product',
             price: 13.5,
             description: 'lorem ipsum set',
             image: 'https://i.pravatar.cc',
             category: 'electronic'
-        })
+        });
+
+        return res;
     }
-    // const res = useMutation(postData);
+    const {mutate, data, isLoading} = useMutation(postData);
+    console.log(data, isLoading);
+    
 
 
 
     return (
         <div>
+            <button onClick={() => mutate()}>Send</button>
             {<p>{id}</p>}
         </div>
     );

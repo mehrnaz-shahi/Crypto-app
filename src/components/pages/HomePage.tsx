@@ -15,8 +15,8 @@ const HomePage = () => {
 
     const res = useQuery(["coins"], fetchData,
         {
-            cacheTime: 5 * 1000,
-            staleTime: 5 * 1000,
+            // cacheTime: 5 * 1000,
+            // staleTime: 5 * 1000,
             // enabled: false,
             // refetchOnMount: false,
             // refetchOnWindowFocus: false,
