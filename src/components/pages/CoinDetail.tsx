@@ -21,6 +21,8 @@ const CoinDetail = () => {
 
         return res;
     }
+
+    
     const {mutate, data, isLoading} = useMutation(postData);
     console.log(data, isLoading);
     

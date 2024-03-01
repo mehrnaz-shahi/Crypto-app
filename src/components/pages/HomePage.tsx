@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import BasicTable from "../BasicTable";
+import { extractFieldsFromObjects, modifyValueByKey } from "../helpers/filterData";
 
 const HomePage = () => {
 
@@ -23,14 +24,14 @@ const HomePage = () => {
             // refetchInterval: 5 * 1000,
             // onSuccess: (data) => {
             //     console.log('200');
-                
+
             // },
             // onError: (error) => {
             //     console.log(error.message);
-                
+
             // }
 
-        
+
         }
     );
 
@@ -43,16 +44,43 @@ const HomePage = () => {
 
     };
 
-    console.log(res);
+    if (!isLoading &&  Array.isArray(data?.data)) {
+        
+
+            let newObj = extractFieldsFromObjects(data.data, {
+                    'market_cap_rank': 'Rank', "image": '', 'symbol': 'Coin', 'name': 'Name',
+                    'current_price': 'Price', 'price_change_24h': '24h', 'total_volume': 'Total volume'
+                });
+
+                
+                
+                
+                
+                newObj =  modifyValueByKey(newObj,  'Coin', (value) => value.toUpperCase());
+                newObj = modifyValueByKey(newObj, 'Price', (value) => '$' + value.toLocaleString());
+                newObj = modifyValueByKey(newObj, "24h", value => value.toFixed(2) + "%");
+                
+                
+                console.log(newObj);
+       
+
+       
+
+    }
+
+
+
 
     return (
         <div className="flex flex-col">
             {isLoading && <p>Is loading .....</p>}
 
             {/* <button onClick={refetch}>Fetch</button> */}
-            {data?.data.map((item: any, index:number) => {
+            {/* {data?.data.map((item: any, index:number) => {
                 return <Link to={`/coin/${item.id}`} key={index}>{item.id} </Link>
-            })}
+            })} */}
+
+            <BasicTable />
         </div>
     );
 };
