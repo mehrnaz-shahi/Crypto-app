@@ -51,12 +51,14 @@ const HomePage = () => {
     if (!isLoading && Array.isArray(data?.data)) {
 
 
-        newObj = modifyValueByKey(data.data, 'name', (value) => value.toUpperCase());
+        newObj = modifyValueByKey(data.data, 'symbol', (value) => value.toUpperCase());
         newObj = modifyValueByKey(newObj, 'current_price', (value) => '$' + value.toLocaleString());
         newObj = modifyValueByKey(newObj, "market_cap_change_percentage_24h", value => value.toFixed(2) + "%");
+        newObj = modifyValueByKey(newObj, "total_volume", value => value.toLocaleString());
+
 
         newObj = extractFieldsFromObjects(newObj, {
-            'market_cap_rank': 'Rank', "image": '', 'symbol': 'Coin', 'name': 'Name',
+            'market_cap_rank': 'Rank', "image": 'image', 'symbol': 'Coin', 'name': 'Name',
             'current_price': 'Price', 'market_cap_change_percentage_24h': '24h', 'total_volume': 'Total volume'
         });
 
