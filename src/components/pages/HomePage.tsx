@@ -44,27 +44,23 @@ const HomePage = () => {
 
     };
 
-    if (!isLoading &&  Array.isArray(data?.data)) {
-        
+    // console.log(data?.data);
 
-            let newObj = extractFieldsFromObjects(data.data, {
-                    'market_cap_rank': 'Rank', "image": '', 'symbol': 'Coin', 'name': 'Name',
-                    'current_price': 'Price', 'price_change_24h': '24h', 'total_volume': 'Total volume'
-                });
+    let newObj;
 
-                
-                
-                
-                
-                newObj =  modifyValueByKey(newObj,  'Coin', (value) => value.toUpperCase());
-                newObj = modifyValueByKey(newObj, 'Price', (value) => '$' + value.toLocaleString());
-                newObj = modifyValueByKey(newObj, "24h", value => value.toFixed(2) + "%");
-                
-                
-                console.log(newObj);
-       
+    if (!isLoading && Array.isArray(data?.data)) {
 
-       
+
+        newObj = modifyValueByKey(data.data, 'name', (value) => value.toUpperCase());
+        newObj = modifyValueByKey(newObj, 'current_price', (value) => '$' + value.toLocaleString());
+        newObj = modifyValueByKey(newObj, "market_cap_change_percentage_24h", value => value.toFixed(2) + "%");
+
+        newObj = extractFieldsFromObjects(newObj, {
+            'market_cap_rank': 'Rank', "image": '', 'symbol': 'Coin', 'name': 'Name',
+            'current_price': 'Price', 'market_cap_change_percentage_24h': '24h', 'total_volume': 'Total volume'
+        });
+
+        console.log(newObj);
 
     }
 
@@ -79,8 +75,10 @@ const HomePage = () => {
             {/* {data?.data.map((item: any, index:number) => {
                 return <Link to={`/coin/${item.id}`} key={index}>{item.id} </Link>
             })} */}
+            {
+                !isLoading && data?.data && <BasicTable data={newObj} />
 
-            <BasicTable />
+            }
         </div>
     );
 };
