@@ -18,6 +18,8 @@ export default function BasicTable({ data }: DataProps) {
 
   const [open, setOpen] = useState<boolean>(false);
 
+  const [coinInfo, setCoinInfo] = useState({});
+
   if (!data || data.length === 0) {
     return null;
   }
@@ -26,6 +28,9 @@ export default function BasicTable({ data }: DataProps) {
 
   const handleOpen = (row: any) => {
     setOpen(!open);
+    if (row !== coinInfo) {
+      setCoinInfo(row);
+    }
   }
 
 
@@ -75,7 +80,7 @@ export default function BasicTable({ data }: DataProps) {
             </TableRow>
           ))}
 
-          <ChartModal open={open} />
+          <ChartModal open={open} setOpen={setOpen} info={coinInfo} />
         </TableBody>
       </Table>
     </TableContainer>

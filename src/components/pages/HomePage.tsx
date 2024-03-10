@@ -2,15 +2,19 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import BasicTable from "../BasicTable";
 import { extractFieldsFromObjects, modifyValueByKey } from "../helpers/filterData";
+import Pagination from '@mui/material/Pagination';
+import { useState, useEffect } from "react";
 
 const HomePage = () => {
+
+    const [pageNumber, setPageNumber] = useState<number>(1);
 
     const fetchData = async () => {
 
         console.log("Fetching....");
 
 
-        return await axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en&x_cg_demo_api_key=CG-PVQzhchzRCWYT4Hs7QP7MkDB");
+        return await axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=${pageNumber}&sparkline=false&locale=en&x_cg_demo_api_key=CG-PVQzhchzRCWYT4Hs7QP7MkDB`);
 
     }
 
@@ -44,6 +48,10 @@ const HomePage = () => {
 
     };
 
+    useEffect(() => {
+        refetch();
+    }, [pageNumber])
+
     // console.log(data?.data);
 
     let newObj;
@@ -62,7 +70,6 @@ const HomePage = () => {
             'current_price': 'Price', 'market_cap_change_percentage_24h': '24h', 'total_volume': 'Total volume'
         });
 
-        console.log(newObj);
 
     }
 
@@ -81,6 +88,20 @@ const HomePage = () => {
                 !isLoading && data?.data && <BasicTable data={newObj} />
 
             }
+            <Pagination count={10} color="secondary"
+                sx={{
+                    '.MuiPaginationItem-root': {
+                        color: 'white'
+                    }
+
+                }
+                }
+                showFirstButton
+                showLastButton
+
+                onChange={(e:any, page:number) => setPageNumber(page)}
+
+            />
         </div>
     );
 };
