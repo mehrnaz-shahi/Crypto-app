@@ -12,13 +12,15 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className='bg-blue-500 my-4'>
+      <div className='bg-blue-500 my-4 p-3 rounded-sm font-bold text-xl'>
         <h1>Crypto App</h1>
       </div>
 
+      <HomePage /> 
+
       <Routes>
-        <Route path='/home' element={<HomePage />}/>
-        <Route path='/' element={<Helper />}/>
+        {/* <Route path='/home' element={<HomePage />}/> */}
+        {/* <Route path='/' element={<Helper />}/> */}
         <Route path='/coin/:id' element={<CoinDetail/>}/>
       </Routes>
       <ReactQueryDevtools />

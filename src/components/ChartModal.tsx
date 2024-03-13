@@ -1,5 +1,5 @@
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+// import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { useCoinChart } from '../hooks/queries';
@@ -10,11 +10,10 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
   p: 4,
 };
 
-const ChartModal = ({ open, setOpen, info }: { open: boolean; setOpen: () => void, info: any }) => {
+const ChartModal = ({ open, setOpen, info }: { open: boolean; setOpen: (bool: boolean) => void, info: any }) => {
 
   const coin = info.Name;
   // console.log(coin.toLowerCase());

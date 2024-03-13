@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import BasicTable from "../BasicTable";
 import { extractFieldsFromObjects, modifyValueByKey } from "../helpers/filterData";
-import Pagination from '@mui/material/Pagination';
+import {Pagination} from '@mui/material';
 import { useState, useEffect } from "react";
 
 const HomePage = () => {
@@ -78,15 +78,13 @@ const HomePage = () => {
         <div className="flex flex-col">
             {isLoading && <p>Is loading .....</p>}
 
-            {/* <button onClick={refetch}>Fetch</button> */}
-            {/* {data?.data.map((item: any, index:number) => {
-                return <Link to={`/coin/${item.id}`} key={index}>{item.id} </Link>
-            })} */}
+
             {
                 !isLoading && data?.data && <BasicTable data={newObj} />
 
             }
             <Pagination count={10} color="secondary"
+                className="flex justify-center mt-4"
                 sx={{
                     '.MuiPaginationItem-root': {
                         color: 'white'
@@ -97,7 +95,7 @@ const HomePage = () => {
                 showFirstButton
                 showLastButton
 
-                onChange={(e:any, page:number) => setPageNumber(page)}
+                onChange={(e: any, page: number) => setPageNumber(page)}
 
             />
         </div>

@@ -3,9 +3,10 @@ import { useCoinDetail } from "../../hooks/queries";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 
+
 const CoinDetail = () => {
 
-    const { id } = useParams();
+    const { id }  = useParams() as {id: string};
 
     const res = useCoinDetail(id);
     console.log(res);
