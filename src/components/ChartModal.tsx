@@ -14,32 +14,34 @@ const style = {
   p: 4,
 };
 
-const ChartModal = ({open, setOpen, info}: {open: boolean; setOpen: ()=>void, info: any}) => {
+const ChartModal = ({ open, setOpen, info }: { open: boolean; setOpen: () => void, info: any }) => {
 
-  // const name = info.Name;
-  // if(name){
-  //   const data = useCoinChart(name.toLowerCase(), 7);
-  // }
-  
-    return (
-      <div>
-        <Modal
-          open={open}
-          onClose={()=>setOpen(false)}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style} className="bg-red-400">
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              {info.Name}
-            </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-            </Typography>
-          </Box>
-        </Modal>
-      </div>
-    );
+  const coin = info.Name;
+  // console.log(coin.toLowerCase());
+
+  const data = useCoinChart(coin?.toLowerCase(), 7);
+  console.log(data);
+
+
+  return (
+    <div>
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style} className="bg-red-400">
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            {info.Name}
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+          </Typography>
+        </Box>
+      </Modal>
+    </div>
+  );
 };
 
 export default ChartModal;

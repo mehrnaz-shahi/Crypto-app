@@ -10,9 +10,7 @@ const HomePage = () => {
     const [pageNumber, setPageNumber] = useState<number>(1);
 
     const fetchData = async () => {
-
         console.log("Fetching....");
-
 
         return await axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=${pageNumber}&sparkline=false&locale=en&x_cg_demo_api_key=CG-PVQzhchzRCWYT4Hs7QP7MkDB`);
 

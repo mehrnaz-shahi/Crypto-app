@@ -54,7 +54,7 @@ const useCoinChart = (id: string, days: number) => {
         return await axios.get(BaseUrl + `/${id}/market_chart?vs_currency=usd&days=${days}&x_cg_demo_api_key=CG-PVQzhchzRCWYT4Hs7QP7MkDB`);
     }
 
-    const res = useQuery(["coins", id], fetchData,
+    const res = useQuery(["coin-chart", id], fetchData,
         {
             refetchOnMount: false,
             refetchOnWindowFocus: false,

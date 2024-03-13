@@ -24,7 +24,6 @@ export default function BasicTable({ data }: DataProps) {
     return null;
   }
   const columns = Object.keys(data[0]);
-  console.log(columns);
 
   const handleOpen = (row: any) => {
     setOpen(!open);
@@ -62,7 +61,7 @@ export default function BasicTable({ data }: DataProps) {
                 (col, colIndex) => (
                   <>
 
-                    <TableCell component="th" scope="row" className={col === '24h' ? row[col].includes('-') ? "!text-red-500" : "!text-green-500" : ""}>
+                    <TableCell key={colIndex} component="th" scope="row" className={col === '24h' ? row[col].includes('-') ? "!text-red-500" : "!text-green-500" : ""}>
                       {
                         col === 'image' ?
                           <img src={row[col]} className='w-8' />
