@@ -2,17 +2,21 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import BasicTable from "../BasicTable";
 import { extractFieldsFromObjects, modifyValueByKey } from "../helpers/filterData";
-import {Pagination} from '@mui/material';
+import { Pagination } from '@mui/material';
 import { useState, useEffect } from "react";
+import SelectBox from "../SelectBox";
 
 const HomePage = () => {
 
     const [pageNumber, setPageNumber] = useState<number>(1);
 
+    const [vc, setVc] = useState<string>("usd")
+
+
     const fetchData = async () => {
         console.log("Fetching....");
 
-        return await axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=${pageNumber}&sparkline=false&locale=en&x_cg_demo_api_key=CG-PVQzhchzRCWYT4Hs7QP7MkDB`);
+        return await axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${vc}&order=market_cap_desc&per_page=50&page=${pageNumber}&sparkline=false&locale=en&x_cg_demo_api_key=CG-PVQzhchzRCWYT4Hs7QP7MkDB`);
 
     }
 
@@ -78,6 +82,7 @@ const HomePage = () => {
         <div className="flex flex-col">
             {isLoading && <p>Is loading .....</p>}
 
+            <SelectBox state={vc} setState={setVc} label="Vc currency" options={["usd", "eur", "jpy"]}/>
 
             {
                 !isLoading && data?.data && <BasicTable data={newObj} />

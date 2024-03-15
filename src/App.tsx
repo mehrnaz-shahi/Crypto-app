@@ -2,9 +2,9 @@ import './App.css';
 import HomePage from './components/pages/HomePage';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { Route, Routes } from 'react-router-dom';
 import Helper from './components/Helper';
 import CoinDetail from './components/pages/CoinDetail';
+import Test from './components/Test';
 
 
 function App() {
@@ -17,13 +17,9 @@ function App() {
       </div>
 
       <HomePage /> 
+      {/* <Test /> */}
 
-      <Routes>
-        {/* <Route path='/home' element={<HomePage />}/> */}
-        {/* <Route path='/' element={<Helper />}/> */}
-        <Route path='/coin/:id' element={<CoinDetail/>}/>
-      </Routes>
-      <ReactQueryDevtools />
+      {/* <ReactQueryDevtools /> */}
     </QueryClientProvider>
 
   )
