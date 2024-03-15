@@ -9,7 +9,6 @@ const CoinDetail = () => {
     const { id }  = useParams() as {id: string};
 
     const res = useCoinDetail(id);
-    console.log(res);
 
     const postData = () => {
         const res =  axios.post("https://fakestoreapi.com/products", {
@@ -25,10 +24,7 @@ const CoinDetail = () => {
 
     
     const {mutate, data, isLoading} = useMutation(postData);
-    console.log(data, isLoading);
     
-
-
 
     return (
         <div>

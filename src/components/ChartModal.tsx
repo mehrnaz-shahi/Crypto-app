@@ -18,24 +18,16 @@ const style = {
 
 const ChartModal = ({ open, setOpen, info }: { open: boolean; setOpen: (bool: boolean) => void, info: any }) => {
 
+
   const [type, setType] = useState("prices");
 
   const coin = info.Name;
-  // console.log(coin.toLowerCase());
-
-  const {data} = useCoinChart(coin?.toLowerCase(), 7);
-  console.log(data?.data);
+  const { data } = useCoinChart(coin?.toLowerCase(), 7);
 
   let converted;
   if (data?.data) {
     converted = convertChartData(data.data, type);
-    console.log(converted);
-    
   }
-
-  
-
-
 
   return (
     <div>
@@ -57,9 +49,8 @@ const ChartModal = ({ open, setOpen, info }: { open: boolean; setOpen: (bool: bo
           <Button onClick={() => setType("market_caps")}>Market caps</Button>
           <Button onClick={() => setType("total_volumes")}>Total volume</Button>
 
-          
-          {data &&
 
+          {data &&
             <Chart data={converted} type='prices' />
           }
         </Box>

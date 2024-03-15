@@ -4,9 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const useCoinsList = () => {
     const fetchData = async () => {
-
         console.log("Fetching....");
-
 
         return await axios.get(getUrl());
 
@@ -28,9 +26,8 @@ const useCoinsList = () => {
 
 
 const useCoinDetail = (id: string) => {
-    const fetchData = async ({ queryKey }) => {
+    const fetchData = async ({ queryKey }: {queryKey: Array<string | number>}) => {
 
-        console.log("Fetching....");
         const id = queryKey[1];
 
         return await axios.get(BaseUrl + '/' + id + "?x_cg_demo_api_key=CG-PVQzhchzRCWYT4Hs7QP7MkDB");

@@ -12,11 +12,13 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className='bg-blue-500 my-4 p-3 rounded-sm font-bold text-xl'>
-        <h1>Crypto App</h1>
-      </div>
+      <div className='p-7'>
+        <div className='bg-blue-500 my-4 p-3 rounded-sm font-bold text-xl'>
+          <h1>Crypto App</h1>
+        </div>
 
-      <HomePage /> 
+        <HomePage />
+      </div>
       {/* <Test /> */}
 
       {/* <ReactQueryDevtools /> */}

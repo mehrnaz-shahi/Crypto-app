@@ -78,8 +78,7 @@ export default function BasicTable({ data }: DataProps) {
 
             </TableRow>
           ))}
-
-          <ChartModal open={open} setOpen={setOpen} info={coinInfo} />
+          {open && <ChartModal open={open} setOpen={setOpen} info={coinInfo} />}
         </TableBody>
       </Table>
     </TableContainer>

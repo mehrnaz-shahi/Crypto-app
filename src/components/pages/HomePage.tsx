@@ -52,17 +52,15 @@ const HomePage = () => {
 
     useEffect(() => {
         refetch();
-    }, [pageNumber])
-
-    // console.log(data?.data);
+    }, [pageNumber, vc])
 
     let newObj;
 
     if (!isLoading && Array.isArray(data?.data)) {
 
-
+        const sign = vc === 'usd' ? '$' : vc === 'eur' ?  '€' : '¥';
         newObj = modifyValueByKey(data.data, 'symbol', (value) => value.toUpperCase());
-        newObj = modifyValueByKey(newObj, 'current_price', (value) => '$' + value.toLocaleString());
+        newObj = modifyValueByKey(newObj, 'current_price', (value) => { return `${sign}${value.toLocaleString()}`});
         newObj = modifyValueByKey(newObj, "market_cap_change_percentage_24h", value => value.toFixed(2) + "%");
         newObj = modifyValueByKey(newObj, "total_volume", value => value.toLocaleString());
 
