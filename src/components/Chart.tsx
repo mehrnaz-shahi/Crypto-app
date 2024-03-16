@@ -10,24 +10,24 @@ const Chart = ({ data, type }: { data: any[], type: string }) => {
         ...entry,
         date: new Date(entry.date).toLocaleString(), // Convert timestamp to date string
     }));
-    console.log('data in ch: ', formattedData);
+    // console.log('data in ch: ', formattedData);
 
 
     return (
         <div className='h-96'>
             <ResponsiveContainer width='100%' height='100%'>
                 <LineChart
-                    data={data}
+                    data={formattedData}
                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
                 >
                     <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="date" hide>
+                    <XAxis dataKey="date" >
                         {/* <Label value="Date" position="bottom" /> */}
                     </XAxis>
                     <YAxis dataKey={type} domain={['auto', 'auto']} />
                     <Tooltip />
                     <Legend />
-                    <Line type="monotone" dataKey={type} activeDot={{ r: 8 }} stroke="#6464ae" strokeWidth="1px" />
+                    <Line type="monotone" dataKey={type} activeDot={{ r: 8 }} stroke="#6464ae" strokeWidth="2px" />
                 </LineChart>
             </ResponsiveContainer>
         </div>

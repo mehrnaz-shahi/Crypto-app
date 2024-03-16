@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { useCoinChart } from '../hooks/queries';
 import Chart from './Chart';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { convertChartData } from './helpers/CovertChartdata';
 
 
@@ -28,6 +28,7 @@ const ChartModal = ({ open, setOpen, info }: { open: boolean; setOpen: (bool: bo
   if (data?.data) {
     converted = convertChartData(data.data, type);
   }
+  
 
   return (
     <div>
@@ -37,7 +38,7 @@ const ChartModal = ({ open, setOpen, info }: { open: boolean; setOpen: (bool: bo
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style} className="bg-red-400">
+        <Box sx={style} className='bg-black bg-opacity-30 backdrop-filter backdrop-blur-lg rounded-lg outline-none text-white w-3/4'>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             {info.Name}
           </Typography>
@@ -45,14 +46,13 @@ const ChartModal = ({ open, setOpen, info }: { open: boolean; setOpen: (bool: bo
             Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
           </Typography>
 
+          {data &&
+            <Chart data={converted} type={type} />
+          }
+          
           <Button onClick={() => setType("prices")}>Prices</Button>
           <Button onClick={() => setType("market_caps")}>Market caps</Button>
           <Button onClick={() => setType("total_volumes")}>Total volume</Button>
-
-
-          {data &&
-            <Chart data={converted} type='prices' />
-          }
         </Box>
       </Modal>
     </div>
