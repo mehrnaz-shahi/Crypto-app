@@ -22,10 +22,11 @@ const ChartModal = ({ open, setOpen, info }: { open: boolean; setOpen: (bool: bo
   const [type, setType] = useState("prices");
 
   const coin = info.Name;
-  const { data } = useCoinChart(coin?.toLowerCase(), 7);
+  const { data, isLoading } = useCoinChart(coin?.toLowerCase(), 7);
+  
 
   let converted;
-  if (data?.data) {
+  if (!isLoading && data?.data) {
     converted = convertChartData(data.data, type);
   }
   
@@ -46,7 +47,7 @@ const ChartModal = ({ open, setOpen, info }: { open: boolean; setOpen: (bool: bo
             Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
           </Typography>
 
-          {data &&
+          {!isLoading && data &&
             <Chart data={converted} type={type} />
           }
           
