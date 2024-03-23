@@ -5,6 +5,7 @@ import { extractFieldsFromObjects, modifyValueByKey } from "../helpers/filterDat
 import { Pagination, Box, TextField } from '@mui/material';
 import { useState, useEffect } from "react";
 import SelectBox from "../SelectBox";
+import SearchBox from "../SearchBox";
 
 const HomePage = () => {
     const [pageNumber, setPageNumber] = useState<number>(1);
@@ -79,13 +80,7 @@ const HomePage = () => {
 
             <Box className="flex ">
                 <SelectBox state={vc} setState={setVc} label="Vc currency" options={["usd", "eur", "jpy"]} />
-
-                <TextField id="search" label="Search coin" variant="standard" className="!mt-2 !ml-4"
-                    sx={{
-                        "& .MuiInput-input": { color: 'white' },
-                        "& .MuiInputLabel-root": {color: '#1976d2'},
-                        '&:before' : {borderColor: "blue"}
-                    }} />
+                <SearchBox />
             </Box>
 
             {

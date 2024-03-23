@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getUrl, BaseUrl } from "../services/api";
+import { getUrl, BaseUrl, searchUrl } from "../services/api";
 import { useQuery } from "@tanstack/react-query";
 
 const useCoinsList = () => {
@@ -30,7 +30,7 @@ const useCoinDetail = (id: string) => {
 
         const id = queryKey[1];
 
-        return await axios.get(BaseUrl + '/' + id + "?x_cg_demo_api_key=CG-PVQzhchzRCWYT4Hs7QP7MkDB");
+        return await axios.get(BaseUrl + '/coins/' + id + "?x_cg_demo_api_key=CG-PVQzhchzRCWYT4Hs7QP7MkDB");
 
     }
 
@@ -48,7 +48,7 @@ const useCoinDetail = (id: string) => {
 const useCoinChart = (id: string, days: number) => {
     const fetchData = async () => {
         
-        return await axios.get(BaseUrl + `/${id}/market_chart?vs_currency=usd&days=${days}&x_cg_demo_api_key=CG-PVQzhchzRCWYT4Hs7QP7MkDB`);
+        return await axios.get(BaseUrl + `/coins/${id}/market_chart?vs_currency=usd&days=${days}&x_cg_demo_api_key=CG-PVQzhchzRCWYT4Hs7QP7MkDB`);
     }
 
     const res = useQuery(["coin-chart", id], fetchData,
@@ -63,4 +63,23 @@ const useCoinChart = (id: string, days: number) => {
 
 }
 
-export { useCoinsList, useCoinDetail, useCoinChart };
+const useSearch = (query: string) => {
+    const fetchData = async () => {
+        
+        return await axios.get(searchUrl(query));
+    }
+
+    const res = useQuery(["search", query], fetchData,
+        {
+            refetchOnMount: false,
+            refetchOnWindowFocus: false,
+
+        }
+    )
+
+    return res;
+
+
+}
+
+export { useCoinsList, useCoinDetail, useCoinChart, useSearch };

@@ -1,4 +1,4 @@
-import { LineChart, AreaChart, Area, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const Chart = ({ data, type }: { data: any[], type: string }) => {
     if (!data || data.length === 0) {
@@ -8,7 +8,7 @@ const Chart = ({ data, type }: { data: any[], type: string }) => {
     // Convert timestamps to human-readable dates
     const formattedData = data.map((entry) => ({
         ...entry,
-        date: new Date(entry.date).toLocaleString(), // Convert timestamp to date string
+        date: new Date(entry.date).toLocaleString(), 
     }));
     // console.log('data in ch: ', formattedData);
 
